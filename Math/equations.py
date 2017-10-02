@@ -95,15 +95,15 @@ def find_var(equation, xpos):						# Returns the true value of the coefficient a
 		return 'Error'								# Returns 'Error' string if something went wrong
 
 def equation(e, var):							# Solves the equation for the variable inputted
-	#try:
-	e = e.lower()
-	vpos = e.find(var)
-	c = find_var(e, vpos)					# Returns the value of the coefficient
-	answer = find_answer(e)					# Returns the value the equation equals
-	constant = find_constants(e, vpos)		# Finds the constant in equation
-	answer -= constant 						# Will add/take constant from other answer
-	eqn_answer = answer/c 					# Divides the answer by the coefficient to solve for the variable
-	return var+' = '+str(eqn_answer)		# Returns "variable = answer"
+	try:
+		e = e.lower()
+		vpos = e.find(var)
+		c = find_var(e, vpos)					# Returns the value of the coefficient
+		answer = find_answer(e)					# Returns the value the equation equals
+		constant = find_constants(e, vpos)		# Finds the constant in equation
+		answer -= constant 						# Will add/take constant from other answer
+		eqn_answer = answer/c 					# Divides the answer by the coefficient to solve for the variable
+		return var+' = '+str(eqn_answer)		# Returns "variable = answer"
 	except:
 		if find_var(e,var) == INVALID_EQUATION:	# Checks if find_var returns INVALID_EQUATION
 			return INVALID_EQUATION				# Returns INVALID_EQUATION if it does
