@@ -1,3 +1,18 @@
+# Python Equation Package
+#
+# USER 		-	pyMurphy
+# DATE		- 	01/10/2017
+# VERSION	-	V0.2
+#
+# This is a package for solving simple linear equations.
+# It is mainly a project for me to improve my programming skills
+# so it may not be the most efficient.
+#
+# Feel free to use this code to learn from, I have commented what
+# I'm doing on each line so that it's easy to understand. Sorry if
+# some of the variable names aren't clear, but hopefully the
+# internal commentary makes up for it.
+
 import string
 
 coefficient_list = [0,1,2,3,4,5,6,7,8,9]	# List of digits 0-9
@@ -19,6 +34,26 @@ def find_answer(equation):					# Finds the answer to the equation
 			return int(eqn[1].lstrip())		# then it will return the right hand side of the equation as the answer
 		elif var in eqn[1]:					# Similarly, if a variable is in the right hand side of the equation
 			return int(eqn[0].lstrip())		# then it will return the left hand side of the equation as the answer
+
+def find_constants(equation, xpos):								# Finds constant in the equation
+	c = check_coefficient(equation,xpos)						# Finds the coefficient for the variable
+	clen = len(str(c))											# Gets the length of the coefficient
+	cpos = equation.find(str(c))								
+	if xpos == cpos+clen:										# Checks if the variable is next to the coefficient (making sure)
+		var_term = equation[cpos:xpos+1]						# Finds the coefficient and variable together
+		eqn = equation.split('=')								# Splits the equation into 2 around the equals sign
+		for var in var_list:									# Goes through every possible variable
+			if var in eqn[0]:									# If there is a variable in the first part of the equation then return that
+				eqn = eqn[0].lstrip()
+			elif var in eqn[1]:									# If there is a variable in the second part of the equation then return that
+				eqn = eqn[1].lstrip()
+		eqn = (eqn.replace(var_term,'')).replace(' ','')		# Remove the x term and whitespace
+		eqn_value = eqn 										# New variable to store the value
+		if '+' in eqn:
+			eqn_value = eqn.replace('+','')						# Removes + sign
+		elif '-' in eqn:
+			eqn_value = eqn.replace('-','')						# Removes - sign
+		return check_negative(eqn, len(eqn)-1,int(eqn_value))  	# Returns the true value of the constant
 
 def check_negative(equation, xpos, value):	# Checks if the coefficient is negative or positive
 	xlen = len(equation[:xpos])				# Finds amount of characters before the variable
@@ -49,10 +84,8 @@ def check_coefficient(equation, xpos):					# Returns the coefficient of the vari
 	except:
 		return 1													# if there are no coefficients, we assume it is being multiplied by 1
 
-def find_var(equation, var):						# Returns the true value of the coefficient and handles errors
-	equation = equation.lower()						# Converts the equation to lowercase to check for
+def find_var(equation, xpos):						# Returns the true value of the coefficient and handles errors
 	try:
-		xpos = equation.find(var)					# Finds the position of the variable passed into the function
 		if is_equation(equation,xpos):				# Checks the equation is a valid equation
 			c = check_coefficient(equation,xpos)	# Stores the coefficient of the variable in 'c'
 			return check_negative(equation,xpos, c) # returns the negative or positive value of the coefficient
@@ -62,11 +95,16 @@ def find_var(equation, var):						# Returns the true value of the coefficient an
 		return 'Error'								# Returns 'Error' string if something went wrong
 
 def equation(e, var):							# Solves the equation for the variable inputted
-	try:
-		c = find_var(e, var)					# Returns the value of the coefficient
-		answer = find_answer(e)					# Returns the value the equation equals
-		eqn_answer = answer/c 					# Divides the answer by the coefficient to solve for the variable
-		return var+' = '+str(eqn_answer)		# Returns "variable = answer"
+	#try:
+	e = e.lower()
+	vpos = e.find(var)
+	c = find_var(e, vpos)					# Returns the value of the coefficient
+	answer = find_answer(e)					# Returns the value the equation equals
+	constant = find_constants(e, vpos)
+	print('Constant: '+str(constant))
+	answer -= constant
+	eqn_answer = answer/c 					# Divides the answer by the coefficient to solve for the variable
+	return var+' = '+str(eqn_answer)		# Returns "variable = answer"
 	except:
 		if find_var(e,var) == INVALID_EQUATION:	# Checks if find_var returns INVALID_EQUATION
 			return INVALID_EQUATION				# Returns INVALID_EQUATION if it does
