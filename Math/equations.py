@@ -100,9 +100,8 @@ def equation(e, var):							# Solves the equation for the variable inputted
 	vpos = e.find(var)
 	c = find_var(e, vpos)					# Returns the value of the coefficient
 	answer = find_answer(e)					# Returns the value the equation equals
-	constant = find_constants(e, vpos)
-	print('Constant: '+str(constant))
-	answer -= constant
+	constant = find_constants(e, vpos)		# Finds the constant in equation
+	answer -= constant 						# Will add/take constant from other answer
 	eqn_answer = answer/c 					# Divides the answer by the coefficient to solve for the variable
 	return var+' = '+str(eqn_answer)		# Returns "variable = answer"
 	except:
