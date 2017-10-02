@@ -20,6 +20,10 @@ def find_answer(equation):					# Finds the answer to the equation
 		elif var in eqn[1]:					# Similarly, if a variable is in the right hand side of the equation
 			return int(eqn[0].lstrip())		# then it will return the left hand side of the equation as the answer
 
+def find_constants(equation, xpos):
+	c = check_coefficient(equation, xpos)
+	print('dicks: '+str(c))
+
 def check_negative(equation, xpos, value):	# Checks if the coefficient is negative or positive
 	xlen = len(equation[:xpos])				# Finds amount of characters before the variable
 	for pos in range(xlen,-1,-1):			# Loops from the character position and goes backwards
@@ -53,6 +57,7 @@ def find_var(equation, var):						# Returns the true value of the coefficient an
 	equation = equation.lower()						# Converts the equation to lowercase to check for
 	try:
 		xpos = equation.find(var)					# Finds the position of the variable passed into the function
+		find_constants(equation, xpos)				
 		if is_equation(equation,xpos):				# Checks the equation is a valid equation
 			c = check_coefficient(equation,xpos)	# Stores the coefficient of the variable in 'c'
 			return check_negative(equation,xpos, c) # returns the negative or positive value of the coefficient
