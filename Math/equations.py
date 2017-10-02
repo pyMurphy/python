@@ -2,7 +2,7 @@ import string
 
 coefficient_list = [0,1,2,3,4,5,6,7,8,9]	# List of digits 0-9
 var_list = list(string.ascii_lowercase)		# List of all lowercase characters
-space_list = [' ','+','-','/','*','=']		# List of possible characters used in between variables
+space_list = [' ','+','-','/','*','=']		# List of possible characters used between variables
 
 INVALID_EQUATION = 'Invalid Equation'		# Global string returned when the equation is invalid
 
