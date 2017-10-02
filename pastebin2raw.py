@@ -1,6 +1,5 @@
-import requests
+import requests, pyperclip
 from bs4 import BeautifulSoup
-import pyperclip
 
 def pastebin2raw(url):
     id = url.split('.com/')[1]
