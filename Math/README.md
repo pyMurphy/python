@@ -11,7 +11,8 @@ You need to pass `equation` and `variable` into the equation function
 ```python
 eqn = input('Enter equation: ')
 var = input('Enter variable: ')
-print('Result: ' + equation(eqn,var))```
+print('Result: ' + equation(eqn,var))
+```
 
 ### Version 0.1
   + Can solve simple equations without constants, for example `4x = 8` would return `x = 2.0`
