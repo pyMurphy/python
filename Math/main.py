@@ -1,5 +1,5 @@
 from equations import equation
 
-e = input('Enter equation: ')
+eqn = input('Enter equation: ')
 var = input('Enter variable: ')
-print('Result: '+equation(e,var))
+print('Result: '+equation(eqn,var))
