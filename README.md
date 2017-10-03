@@ -8,3 +8,5 @@ My journey of learning Python and my different projects in the process.
   + Package that solves simple linear equations
 #### 03/10/2017 - [numberguess.py](numberguess.py)
   + A small number guessing game with minimal code (9 lines)
+#### 04/10/2017 - [lyrics.py](lyrics.py)
+  + Returns the lyrics to a song when the song title and artist are entered
