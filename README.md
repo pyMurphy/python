@@ -6,3 +6,5 @@ My journey of learning Python and my different projects in the process.
   + Retrieve raw source of a pastebin link
 #### 01/10/2017 - [Math/equation.py](Math)
   + Package that solves simple linear equations
+#### 03/10/2017 - [numberguess.py](numberguess.py)
+  + A small number guessing game with minimal code (9 lines)
