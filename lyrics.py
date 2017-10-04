@@ -17,7 +17,10 @@ header = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_5) AppleWe
 
 # Used to format the string so it can be used in the search
 def format_string(s):
-	s = s.lower()			# converts string to lowercase
+	try:
+		s = s.lower()		# converts string to lowercase
+	except:
+		pass
 	s = s.replace(' ','+')	# replaces all space characters with '+'
 	return s 				# returns new formatted string
 
@@ -61,8 +64,11 @@ def get_lyrics(name, artist):
 		except:									# if the number was not valid then
 			print('\nInvalid choice, the first link has been chosen by default\n')
 			results=results[0]					# set results to the first link
-	else:										# if there is only one link then
-		results=results[0]						# set results to only link
+	else:
+		try:									# if there is only one link then
+			results=results[0]					# set results to only link
+		except:
+			return 'No results found\n\n\n'
 	rawl = return_raw_lyrics(name, results)		# get the raw lyrics
 	return return_lyrics(rawl,artist)			# returns the formatted lyrics
 
