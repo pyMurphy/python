@@ -61,7 +61,6 @@ def find_constants(equation, xpos):								# Finds constant in the equation
 
 def check_negative(equation, xpos, value):	# Checks if the coefficient is negative or positive
 	xlen = len(equation[:xpos])				# Finds amount of characters before the variable
-	print('len: '+str(xlen)+':'+equation[:xpos])
 	if xpos==0:
 		return value
 	for pos in range(xlen,-1,-1):			# Loops from the character position and goes backwards
@@ -109,7 +108,6 @@ def equation(e, var):							# Solves the equation for the variable inputted
 		c = find_var(e, vpos)					# Returns the value of the coefficient
 		answer = find_answer(e)					# Returns the value the equation equals
 		constant = find_constants(e, vpos)		# Finds the constant in equation
-		print(constant)
 		answer -= constant 						# Will add/take constant from other answer
 		eqn_answer = answer/c 					# Divides the answer by the coefficient to solve for the variable
 		return var+' = '+str(eqn_answer)		# Returns "variable = answer"
