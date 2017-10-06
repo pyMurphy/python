@@ -43,8 +43,6 @@ def find_constants(equation, xpos):								# Finds constant in the equation
 	if xpos == cpos+clen:	
 		var_term = equation[cpos:xpos+1]
 	elif c==1:
-		print('c = 1')
-		print(equation[xpos])
 		var_term = equation[xpos]
 	if xpos == cpos+clen or c==1:								# Checks if the variable is next to the coefficient (making sure)
 		eqn = equation.split('=')								# Splits the equation into 2 around the equals sign
@@ -59,9 +57,6 @@ def find_constants(equation, xpos):								# Finds constant in the equation
 			eqn_value = eqn.replace('+','')						# Removes + sign for the value
 		elif '-' in eqn:
 			eqn_value = eqn.replace('-','')						# Removes - sign for the value
-		print(eqn)
-		print(eqn.find(eqn_value))
-		print(int(eqn_value))
 		return check_negative(eqn, eqn.find(eqn_value),int(eqn_value))  	# Returns the true value of the constant
 
 def check_negative(equation, xpos, value):	# Checks if the coefficient is negative or positive
