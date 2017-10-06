@@ -2,7 +2,7 @@
 #
 # USER 		-	pyMurphy
 # DATE		- 	01/10/2017
-# VERSION	-	V0.2
+# VERSION	-	V0.2.1
 #
 # This is a package for solving simple linear equations.
 # It is mainly a project for me to improve my programming skills
@@ -38,9 +38,15 @@ def find_answer(equation):					# Finds the answer to the equation
 def find_constants(equation, xpos):								# Finds constant in the equation
 	c = check_coefficient(equation,xpos)						# Finds the coefficient for the variable
 	clen = len(str(c))											# Gets the length of the coefficient
-	cpos = equation.find(str(c))								
-	if xpos == cpos+clen:										# Checks if the variable is next to the coefficient (making sure)
-		var_term = equation[cpos:xpos+1]						# Finds the coefficient and variable together
+	cpos = equation.find(str(c))
+	var_term = None
+	if xpos == cpos+clen:	
+		var_term = equation[cpos:xpos+1]
+	elif c==1:
+		print('c = 1')
+		print(equation[xpos])
+		var_term = equation[xpos]
+	if xpos == cpos+clen or c==1:								# Checks if the variable is next to the coefficient (making sure)
 		eqn = equation.split('=')								# Splits the equation into 2 around the equals sign
 		for var in var_list:									# Goes through every possible variable
 			if var in eqn[0]:									# If there is a variable in the first part of the equation then return that
@@ -50,18 +56,25 @@ def find_constants(equation, xpos):								# Finds constant in the equation
 		eqn = (eqn.replace(var_term,'')).replace(' ','')		# Remove the x term and whitespace
 		eqn_value = eqn 										# New variable to store the value
 		if '+' in eqn:
-			eqn_value = eqn.replace('+','')						# Removes + sign
+			eqn_value = eqn.replace('+','')						# Removes + sign for the value
 		elif '-' in eqn:
-			eqn_value = eqn.replace('-','')						# Removes - sign
-		return check_negative(eqn, len(eqn)-1,int(eqn_value))  	# Returns the true value of the constant
+			eqn_value = eqn.replace('-','')						# Removes - sign for the value
+		print(eqn)
+		print(eqn.find(eqn_value))
+		print(int(eqn_value))
+		return check_negative(eqn, eqn.find(eqn_value),int(eqn_value))  	# Returns the true value of the constant
 
 def check_negative(equation, xpos, value):	# Checks if the coefficient is negative or positive
 	xlen = len(equation[:xpos])				# Finds amount of characters before the variable
+	print('len: '+str(xlen)+':'+equation[:xpos])
+	if xpos==0:
+		return value
 	for pos in range(xlen,-1,-1):			# Loops from the character position and goes backwards
-		if '-' in equation[pos]:			# If the character at that position is equal to '-' then we return the negative of the value
-			return -value
-		if '+' in equation[pos]:			# If the character at that position is equal to '+' then we return the value as normal as it is positive
-			return value
+		if not pos>xpos:
+			if '-' in equation[pos]:		# If the character at that position is equal to '-' then we return the negative of the value
+				return -value
+			if '+' in equation[pos]:		# If the character at that position is equal to '+' then we return the value as normal as it is positive
+				return value
 	return value 							# If there are no characters before the number we assume it is already positive
 
 def check_coefficient(equation, xpos):					# Returns the coefficient of the variable
@@ -101,6 +114,7 @@ def equation(e, var):							# Solves the equation for the variable inputted
 		c = find_var(e, vpos)					# Returns the value of the coefficient
 		answer = find_answer(e)					# Returns the value the equation equals
 		constant = find_constants(e, vpos)		# Finds the constant in equation
+		print(constant)
 		answer -= constant 						# Will add/take constant from other answer
 		eqn_answer = answer/c 					# Divides the answer by the coefficient to solve for the variable
 		return var+' = '+str(eqn_answer)		# Returns "variable = answer"
