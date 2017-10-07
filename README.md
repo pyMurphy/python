@@ -10,3 +10,5 @@ My journey of learning Python and my different projects in the process.
   + A small number guessing game with minimal code (9 lines)
 #### 04/10/2017 - [lyrics.py](lyrics.py)
   + Returns the lyrics to a song when the song title and artist are entered
+#### 06/10/2017 - [Overbuff/overbuff.py](Overbuff)
+  + Package that allows you to get SR, level and all stats from a user's battletag
