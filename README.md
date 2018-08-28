@@ -12,5 +12,5 @@ My journey of learning Python and my different projects in the process.
   + Returns the lyrics to a song when the song title and artist are entered
 #### 06/10/2017 - [Overbuff/overbuff.py](Overbuff)
   + Package that allows you to get SR, level and all stats from a user's battletag
-#### 05/08/2018 - [arpspoof.py](ARP Spoof)
+#### 05/08/2018 - [arpspoof.py](arpspoof.py)
   + ARP Spoofing tool (educational)
